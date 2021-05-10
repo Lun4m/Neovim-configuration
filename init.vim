@@ -15,6 +15,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'JuliaEditorSupport/julia-vim'
 Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'bfredl/nvim-ipy'
 Plug 'unblevable/quick-scope'
 " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
@@ -59,16 +60,25 @@ let g:far#file_mask_favorites=['%:p', '**/*.*', '**/*.js', '**/*.py', '**/*.java
 let g:far#window_min_content_width=30 
 let g:far#window_min_content_width=30
 
-
 " Julia
 let g:latex_to_unicode_tab = 0
 let g:latex_to_unicode_auto = 1
+
+" NERDtree
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
 
 " QuickScope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 highlight QuickScopePrimary guifg='#00C7DF' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
 let g:qs_max_chars=150
+
+" Rooter
+let g:rooter_manual_only = 1
 
 " Signify
 let g:signify_sign_add               = '+'
